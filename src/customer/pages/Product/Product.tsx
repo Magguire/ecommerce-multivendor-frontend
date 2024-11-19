@@ -6,7 +6,7 @@ import {
     FormControl,
     IconButton,
     InputLabel,
-    MenuItem,
+    MenuItem, Pagination,
     Select,
     useMediaQuery,
     useTheme
@@ -18,12 +18,18 @@ const Product = () => {
 
     const theme= useTheme();
     const isLarge = useMediaQuery(theme.breakpoints.up("lg"));
-
     const [sort, setSort] =useState();
+    const [page, setPage] = useState(1);
 
     const handleSortChange = (event:any) => {
         setSort(event.target.value);
-    }
+    };
+
+    const handlePageChange = (value: number) => {
+
+        setPage(value);
+
+    };
 
     return (
         <div className={'-z-10 mt-10'}>
@@ -58,7 +64,7 @@ const Product = () => {
                                 {
                                     !isLarge && <Box>
 
-                                    <FilterSection/>
+                                        <FilterSection/>
 
                                     </Box>
                                 }
@@ -69,11 +75,11 @@ const Product = () => {
                             <FormControl size="small" sx={{width: "200px"}}>
                                 <InputLabel id="demo-simple-select-label">Sort</InputLabel>
                                 <Select variant={'outlined'}
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={sort}
-                                    label="Age"
-                                    onChange={handleSortChange}
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={sort}
+                                        label="Age"
+                                        onChange={handleSortChange}
                                 >
                                     <MenuItem value={"price_low"}>Price : Low - High</MenuItem>
                                     <MenuItem value={"price_high"}>Price : High - Low</MenuItem>
@@ -86,11 +92,22 @@ const Product = () => {
 
                         <Divider/>
 
-                        <section className="products_section">
-
-                            <ProductCard/>
+                        <section className="products_section
+                        grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-5 px-5 justify-center">
+                            {
+                                [1, 1, 1, 1, 1, 1, 1, 1].map((item) => <ProductCard/>)
+                            }
 
                         </section>
+
+                        <div className={"flex justify-center py-10"}>
+                            <Pagination
+                                onChange={(e, value) => handlePageChange(value)}
+                                count={10}
+                                variant={"outlined"}
+                                color={"primary"}/>
+
+                        </div>
 
                     </div>
 
