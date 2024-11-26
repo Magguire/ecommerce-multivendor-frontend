@@ -2,7 +2,9 @@ import {Radio} from "@mui/material";
 
 const AddressCard= () => {
 
-    const handleChange = ()=> {
+    const handleChange = (event: any)=> {
+
+        console.log(event.target.checked);
 
     };
 
@@ -24,9 +26,12 @@ const AddressCard= () => {
 
                 <h1>Zosh</h1> {/*Username*/}
 
-                <p className="w-[32px]">Ambavadi choke, Banglor, Karnataka - 530068</p>
+                <p className="w-[320px]">
+                    Ambavadi choke, Banglor, Karnataka - 530068
+                </p>
                 
                 <p className=""><strong>Mobile :</strong> 254702509105</p>
+
             </div>
 
         </div>
